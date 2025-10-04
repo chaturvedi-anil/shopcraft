@@ -1,4 +1,4 @@
-import { NextFunction, Request } from "express";
+import { NextFunction, Request, Response } from "express";
 import { ZodError, ZodObject } from "zod";
 import ErrorHandler from "../utils/error-handler";
 
