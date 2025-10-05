@@ -1,10 +1,10 @@
 import ErrorHandler from "../../utils/error-handler";
 import { comparePassword, hashPassword } from "../../utils/hash";
 import { signToken } from "../../utils/jwt";
-import { SignupProp, SigninProp } from "./auth.controller";
+import { LoginProp, RegisterProp } from "./auth.controller";
 import * as authRepository from "./auth.repository";
 
-export const signupUser = async (reqBody: SignupProp) => {
+export const registerUser = async (reqBody: RegisterProp) => {
   const { name, email, password } = reqBody;
   const isUserExisting = await authRepository.findUserByEmail(email);
 
@@ -23,7 +23,7 @@ export const signupUser = async (reqBody: SignupProp) => {
   return { user, token };
 };
 
-export const singinUser = async (reqBody: SigninProp) => {
+export const loginUser = async (reqBody: LoginProp) => {
   const { email, password } = reqBody;
   const isUserExist = await authRepository.findUserByEmailWithPassword(email);
 

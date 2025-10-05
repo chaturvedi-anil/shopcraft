@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import ErrorHandler from "./error-handler";
 
 const JWT_SECRET = "JWT_SECRET";
+
 export type TokenPayload = { id: number; email: string };
 
 export const signToken = (payload: TokenPayload) => {

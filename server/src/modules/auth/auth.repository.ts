@@ -1,5 +1,5 @@
 import { prismaClient } from "../../config/database";
-import { SignupProp } from "./auth.controller";
+import { RegisterProp } from "./auth.controller";
 
 export const findUserByEmail = (email: string) => {
   return prismaClient.user.findUnique({
@@ -19,7 +19,7 @@ export const findUserByEmailWithPassword = (email: string) => {
   });
 };
 
-export const createUser = async (data: SignupProp) => {
+export const createUser = async (data: RegisterProp) => {
   return prismaClient.user.create({
     data: {
       name: data.name,

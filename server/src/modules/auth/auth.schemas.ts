@@ -3,7 +3,7 @@ import { z } from "zod";
 const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^])[A-Za-z\d@$!%*?&#^]{8,}$/;
 
-export const signupSchema = z.object({
+export const registerSchema = z.object({
   name: z
     .string()
     .min(2, "Name must be at least 2 characters long.")
@@ -19,7 +19,7 @@ export const signupSchema = z.object({
     ),
 });
 
-export const signinSchema = z.object({
+export const loginSchema = z.object({
   email: z.email("Please enter a valid email address."),
   password: z
     .string()
