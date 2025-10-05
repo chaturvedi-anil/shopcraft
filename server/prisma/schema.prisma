@@ -35,5 +35,5 @@ model Product {
   updatedAt   DateTime    @updatedAt  
 
 
-  @@unique([createdAt, name])
+  @@unique([createdBy, name])
 }
