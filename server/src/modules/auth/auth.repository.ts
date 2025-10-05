@@ -9,7 +9,14 @@ export const findUserByEmail = (email: string) => {
 };
 
 export const findUserByEmailWithPassword = (email: string) => {
-  return prismaClient.user.findUnique({ where: { email } });
+  return prismaClient.user.findUnique({
+    where: { email },
+    select: {
+      id: true,
+      email: true,
+      password: true,
+    },
+  });
 };
 
 export const createUser = async (data: SignupProp) => {

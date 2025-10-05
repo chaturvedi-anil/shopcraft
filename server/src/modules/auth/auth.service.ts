@@ -31,7 +31,10 @@ export const singinUser = async (reqBody: SigninProp) => {
     throw new ErrorHandler(`Invalid email or password`, 401);
   }
 
-  const isPasswordCorrect = comparePassword(password, isUserExist.password);
+  const isPasswordCorrect = await comparePassword(
+    password,
+    isUserExist.password
+  );
 
   if (!isPasswordCorrect) {
     throw new ErrorHandler(`Invalid email or password`, 401);
