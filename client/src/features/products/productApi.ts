@@ -1,6 +1,6 @@
-import { fetchBaseQuery } from "@reduxjs/toolkit/query";
-import { createApi } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { loadToken } from "../../utils/storage";
+import type { Product } from "./productSlice";
 
 export type AddProductPayload = {
   name: string;
@@ -21,7 +21,11 @@ export const productApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    addProduct: builder.mutation({
+    getAllProducts: builder.query<Product[], void>({
+      query: () => "/products",
+    }),
+
+    addProduct: builder.mutation<Product, AddProductPayload>({
       query: (payload) => ({
         url: "/products",
         method: "POST",
@@ -29,11 +33,11 @@ export const productApi = createApi({
       }),
     }),
 
-    getMyProduct: builder.query({
+    getMyProduct: builder.query<Product[], void>({
       query: () => "/me/products",
     }),
 
-    deleteProduct: builder.mutation({
+    deleteProduct: builder.mutation<void, number>({
       query: (id: number) => ({
         url: `/products/:${id}`,
         method: "DELETE",
@@ -51,6 +55,7 @@ export const productApi = createApi({
 });
 
 export const {
+  useGetAllProductsQuery,
   useAddProductMutation,
   useDeleteProductMutation,
   useGetMyProductQuery,
