@@ -1,26 +1,27 @@
-# ---- Base image ----
+# base image
 FROM node:18-alpine
 
-# Set working directory
+# working directory
 WORKDIR /app
 
-# Copy dependency files first
+# copy dependencies 
 COPY package*.json tsconfig.json ./
 
-# Install dependencies
-RUN npm install
+# install dependencies
+RUN npm install 
 
-# Copy rest of the backend code
+# copy rest of the backend code
 COPY . .
 
-# Generate Prisma client
+# generate prsima client
 RUN npx prisma generate
 
-# Build TypeScript
+# build typescript
 RUN npm run build
 
-# Expose backend port
+# expose backend port
 EXPOSE 5000
 
-# Run the compiled server
-CMD ["npm", "run", "start"]
+# run the compiled server
+CMD [ "npm", "run", "start" ]
+
