@@ -1,0 +1,63 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: shopcraft-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: shopcraft
+
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_database:/var/lib/postgresql/data
+    networks:
+      - shopcraft-network
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: shopcraft-backend
+    restart: always
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgres://postgres:password@shopcraft-postgres:5432/shopcraft
+    depends_on:
+      - postgres
+    ports:
+      - "5000:5000"
+    networks:
+      - shopcraft-network
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    command: >
+      sh -c "npx prisma migrate deploy && npx prisma generate && npm run dev"
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: shopcraft-frontend
+    restart: always
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    # depends_on:
+    #   - server
+    ports:
+      - "5173:5173"
+    networks:
+      - shopcraft-network
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+
+networks:
+  shopcraft-network:
+    driver: bridge
+volumes:
+  postgres_database:

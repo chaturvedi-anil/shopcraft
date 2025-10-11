@@ -13,11 +13,12 @@ RUN npm install
 # copy rest of the backend code
 COPY . .
 
+
 # generate prsima client
 RUN npx prisma generate
 
 # build typescript
-RUN npm run build
+RUN npm run build 
 
 # expose backend port
 EXPOSE 5000
