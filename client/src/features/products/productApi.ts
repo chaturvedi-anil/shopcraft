@@ -5,8 +5,15 @@ import type { Product } from "./productSlice";
 export type AddProductPayload = {
   name: string;
   price: number;
-  descriptiom: string;
+  description: string;
   category: string;
+};
+
+export type UpdateProductPayload = {
+  id: number;
+  price?: number;
+  description?: string;
+  category?: string;
 };
 
 export const productApi = createApi({
@@ -44,8 +51,8 @@ export const productApi = createApi({
       }),
     }),
 
-    updateProduct: builder.mutation({
-      query: (id: number, payload: any) => ({
+    updateProduct: builder.mutation<Product, UpdateProductPayload>({
+      query: ({ id, ...payload }) => ({
         url: `/products/:${id}`,
         method: "PATCH",
         body: payload,

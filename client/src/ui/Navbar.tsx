@@ -20,10 +20,10 @@ const Navbar = () => {
 
           {/* Actions */}
           <div className="flex items-center space-x-2 mt-2 sm:mt-0">
-            <Link to={"/signin"}>
-              <Button variant="primary">Sign In</Button>
+            <Link to={"/login"}>
+              <Button variant="primary">Log In</Button>
             </Link>
-            <Link to={"/signup"}>
+            <Link to={"/register"}>
               <Button variant="primary">Register</Button>
             </Link>
           </div>

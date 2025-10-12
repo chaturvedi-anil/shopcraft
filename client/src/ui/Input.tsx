@@ -4,7 +4,8 @@ import React from "react";
 const Input = React.forwardRef<
   HTMLInputElement,
   {
-    label: string;
+    label?: string;
+    name?: string;
     type: string;
     placeholder?: string;
     className?: string;

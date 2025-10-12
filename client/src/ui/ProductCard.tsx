@@ -1,4 +1,3 @@
-import React from "react";
 import type { ProductProp } from "./ProductList";
 import Button from "./Button";
 
