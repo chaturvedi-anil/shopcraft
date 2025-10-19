@@ -46,8 +46,8 @@ services:
     restart: always
     environment:
       CHOKIDAR_USEPOLLING: "true"
-    # depends_on:
-    #   - server
+    depends_on:
+      - server
     ports:
       - "5173:5173"
     networks:
@@ -55,6 +55,7 @@ services:
     volumes:
       - ./client:/app
       - /app/node_modules
+    command: ["npm", "run", "dev", "--", "--host"]
 
 networks:
   shopcraft-network:

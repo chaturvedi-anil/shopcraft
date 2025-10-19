@@ -14,7 +14,6 @@ export const isAuthenticated = CatchAsyncRequest(
     const decoded = verifyToken(token) as TokenPayload;
 
     req.user = decoded;
-    console.log(req.user);
 
     next();
   }
